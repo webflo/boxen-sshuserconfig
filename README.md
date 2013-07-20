@@ -23,7 +23,7 @@ remote_hostname => "somehost",
 remote_username => 'root',
 remote_port => '22',
 } 	
-puppet```
+```
 
 Requirements
 ------------
