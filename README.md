@@ -13,7 +13,8 @@ This module is perfectly compatible with Boxen
 Usage
 ---------
 ```puppet
-# this does setup the .ssh config, backups your old one and uses it as an entry in .ssh/config.d/config_old
+# this does setup the .ssh config, backups your old one 
+#and uses it as an entry in .ssh/config.d/config_old
 incldue sshuserconfig 
 
 sshuserconfig::host {
@@ -22,7 +23,8 @@ remote_hostname => "somehost",
 remote_username => 'root',
 remote_port => '22',
 } 	
-```puppet
+puppet```
+
 Requirements
 ------------
 
