@@ -23,6 +23,7 @@ define sshuserconfig::host(
   Port ${remote_port}
   User ${remote_username}
   IdentityFile ${privkey_path}\n\n"
-  }
-  #$ssh_config_file = "${ssh_dir}/config"    
+  }  
+  
+  include sshuserconfig::generate
 }

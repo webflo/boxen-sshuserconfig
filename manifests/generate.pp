@@ -20,7 +20,7 @@ class sshuserconfig::generate {
 	
     exec { "generate_config":
       command => "cat $ssh_config_dir/* >> $ssh_config_file",	
-	  require => "clear_config",
-	  subscribe => File[$ssh_config_dir],
+	  require => Exec["clear_config"],
+	  #subscribe => File[$ssh_config_dir], #does not work yet
     }	
 }
