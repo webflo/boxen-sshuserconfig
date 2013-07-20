@@ -31,6 +31,11 @@ remote_username => 'root',
 # - user ( the user this entry should stored for, so the "destination home folder")
 ```
 
+For now, see ToDos, the .ssh/config file does not get generated, since i cant get it work sshuserconfig::generate to work (timig based). You have to run
+
+```bash
+cat ~/.ssh/config.d/* ~/.ssh/config
+```
 Requirements
 ------------
 
@@ -50,5 +55,6 @@ You should remove that old config when you have done using sshuserconfig to main
 ToDo
 ---------
 - [x] make first-run convinient (backup old config, use old config)
+- [ ] Important: get sshuserconfig::generate to work ( as a notify or manuelly)
 - [ ] remove the OSX requirement and make it Linux compatible ( bascically just abstract the default user folder - thats it)
 - [ ] more docs
