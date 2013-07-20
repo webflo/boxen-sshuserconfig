@@ -15,7 +15,7 @@ Usage
 ```puppet
 # this does setup the .ssh config, backups your old one 
 #and uses it as an entry in .ssh/config.d/config_old
-incldue sshuserconfig 
+include sshuserconfig 
 
 # that actually adds a new entry, which will be place under
 # ~/.ssh/config.d/aliasname
@@ -28,7 +28,7 @@ remote_username => 'root',
 #you can also set the 
 # - priv_key_name
 # - remote_port
-# - user ( the user this entry should stored for, so the "desti home folder")
+# - user ( the user this entry should stored for, so the "destination home folder")
 ```
 
 Requirements
