@@ -28,19 +28,5 @@ define sshuserconfig::host(
   User ${remote_username}
   IdentityFile ${privkey_path}\n\n",
 	ensure => 'present',
-#	notify => Exec['generate_config'],
-  } 
-  
-  $ssh_config_file = "${ssh_dir}/config"
-  $ssh_config_dir = "${ssh_dir}/config.d"   
-  # that regenerates our .ssh/config
- 
-  exec { "generate_config_for_${$entry_dest}":
-    command => "cat $ssh_config_dir/* >> $ssh_config_file",	
-    require => [Exec["Sshuserconfig::clear_config"]],
-	subscribe => File[$entry_dest],
-	refreshonly => true,
-	#before => $entry_dest,
-  #subscribe => File[$ssh_config_dir], #does not work yet
-  }	
+  }     
 }
