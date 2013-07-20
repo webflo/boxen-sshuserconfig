@@ -24,12 +24,13 @@ sshuserconfig::host {
 remote_hostname => "somehost.tld",
 remote_username => 'root',
 }
-```
 
 #you can also set the 
 # - priv_key_name
 # - remote_port
 # - user ( the user this entry should stored for, so the "desti home folder")
+```
+
 Requirements
 ------------
 
