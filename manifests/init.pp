@@ -28,11 +28,13 @@ class sshuserconfig {
   # backup config file if first run
   exec { "backup_config":
     command => "cp ${ssh_config_file} ${ssh_config_file}.old",
-	onlyif => ["test -f {$ssh_config_file}"]
+	onlyif => ["test -f {$ssh_config_file}"],
+	refreshonly => true,
   }   
   exec { "use_old_config":
     command => "mv ${ssh_config_file} ${ssh_config_dir}/config_old_backup",	
 	require => Exec["backup_config"], #backup first
-	onlyif => ["test -f {$ssh_config_file}"]
+	onlyif => ["test -f {$ssh_config_file}"],
+	refreshonly => true
   }
 }
