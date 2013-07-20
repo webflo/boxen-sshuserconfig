@@ -5,7 +5,7 @@ define sshuserconfig::host(
   $user = undef,
   $remote_port = 22,
 ) {
-	
+  #determine were to store the entry (for whic user)
   $unix_user = $user ? {
     undef   => $::luser,
 	default => $user

@@ -17,14 +17,19 @@ Usage
 #and uses it as an entry in .ssh/config.d/config_old
 incldue sshuserconfig 
 
+# that actually adds a new entry, which will be place under
+# ~/.ssh/config.d/aliasname
 sshuserconfig::host {
 "aliasname":
-remote_hostname => "somehost",
+remote_hostname => "somehost.tld",
 remote_username => 'root',
-remote_port => '22',
-} 	
+}
 ```
 
+#you can also set the 
+# - priv_key_name
+# - remote_port
+# - user ( the user this entry should stored for, so the "desti home folder")
 Requirements
 ------------
 
