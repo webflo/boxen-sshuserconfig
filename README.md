@@ -34,7 +34,7 @@ remote_username => 'root',
 For now, see ToDos, the .ssh/config file does not get generated, since i cant get it work sshuserconfig::generate to work (timig based). You have to run
 
 ```bash
-cat ~/.ssh/config.d/* ~/.ssh/config
+cat ~/.ssh/config.d/* > ~/.ssh/config
 ```
 Requirements
 ------------
