@@ -12,6 +12,7 @@ This makes maintaing entrys much easier and convinient.
 This module is perfectly compatible with Boxen
 Usage
 ---------
+```puppet
 # this does setup the .ssh config, backups your old one and uses it as an entry in .ssh/config.d/config_old
 incldue sshuserconfig 
 
@@ -21,7 +22,7 @@ remote_hostname => "somehost",
 remote_username => 'root',
 remote_port => '22',
 } 	
-
+```puppet
 Requirements
 ------------
 
@@ -32,7 +33,14 @@ Manifests
 
 * init.pp : us it like "includ sshuserconfig" to setup you .ssh folder correctly. 
 * host.pp : use this to generate a new entry
- 
+
+Hints
+---------
+After your first run, your old config gets backuped to config.old and copied as an "alias" to config.d/config_old
+You should remove that old config when you have done using sshuserconfig to maintain your entrys one by one
+
 ToDo
 ---------
-* remove the OSX requirement and make it Linux compatible ( bascically just abstract the default user folder - thats it)
+- [x] make first-run convinient (backup old config, use old config)
+- [ ] remove the OSX requirement and make it Linux compatible ( bascically just abstract the default user folder - thats it)
+- [ ] more docs
