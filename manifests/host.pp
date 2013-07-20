@@ -44,8 +44,8 @@ define sshuserconfig::host(
   exec { "generate_config":
     command => "cat $ssh_config_dir/* >> $ssh_config_file",	
     require => [Exec["clear_config"]],
-	subscribe => File[$entry_dest]
-	refreshonly => true
+	subscribe => File[$entry_dest],
+	refreshonly => true,
 	#before => $entry_dest,
   #subscribe => File[$ssh_config_dir], #does not work yet
   }	
