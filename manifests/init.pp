@@ -21,8 +21,7 @@ class sshuserconfig {
     ensure => 'present',
 	notify => Exec["use_old_config"],
   } ~>
-  file { $ssh_config_file :
-	  
+  file { $ssh_config_file :	 
     owner => $::luser
   }
   
@@ -30,8 +29,7 @@ class sshuserconfig {
   exec { "backup_config":
     command => "cp ${ssh_config_file} ${ssh_config_file}.old",
 	onlyif => ["test -f {$ssh_config_file}"]
-  } ->
-  
+  }   
   exec { "use_old_config":
     command => "mv ${ssh_config_file} ${ssh_config_dir}/config_old_backup",	
 	require => Exec["backup_config"], #backup first
