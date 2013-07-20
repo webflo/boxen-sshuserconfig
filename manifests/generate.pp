@@ -1,12 +1,15 @@
-define sshuserconfig::generate (
-	include sshuserconfig
-	$user => undef
-	) {
+#define sshuserconfig::generate (
+#	include sshuserconfig
+#	$user => undef
+#	) {
+	
+# we are using a class for right now, since iam not sure we can notify a method	
+class sshuserconfig::generate {
     #determine were to store the entry (for which user)
-    $unix_user = $user ? {
-      undef   => $::luser,
-  	  default => $user
-    }	
+    #$unix_user = $user ? {
+    #  undef   => $::luser,
+  	#  default => $user
+    #}	
     $ssh_dir = "/Users/${::luser}/.ssh"
     $ssh_config_file = "${ssh_dir}/config"
     $ssh_config_dir = "${ssh_dir}/config.d"
@@ -17,5 +20,7 @@ define sshuserconfig::generate (
 	
     exec { "generate_config":
       command => "cat $ssh_config_dir/* >> $ssh_config_file",	
-    }		
+	  require => "clear_config",
+	  subscribe => File[$ssh_config_dir],
+    }	
 }
