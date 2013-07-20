@@ -10,7 +10,7 @@ define sshuserconfig::host(
     undef   => $::luser,
 	default => $user
   }	
-
+  #TODO: make an OS exception here or an variable, so Linux users can set /home as path for user folders
   $ssh_dir = "/Users/${unix_user}/.ssh"
   $privkey_path = "${ssh_dir}/$priv_key_name"  
   $alias = "${title}"

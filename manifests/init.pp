@@ -1,19 +1,40 @@
 class sshuserconfig {
+  #TODO: make an OS exception here or an variable, so Linux users can set /home as path for user folders
   $ssh_dir = "/Users/${::luser}/.ssh"
   $ssh_config_file = "${ssh_dir}/config"
-  file { $ssh_config_file :
-    owner => $::luser
-  }
+  $ssh_config_dir = "${ssh_dir}/config.d"
+  $firsrunlock = "${ssh_dir}/.sshuserconfig"
   
   file { $ssh_dir:
     ensure => "directory",
 	mode => 0700
   }
   
-  file { "${ssh_dir}/config.d":
+  file { $ssh_config_dir:
     ensure => "directory",
 	mode => 0700
   }
-  #TODO: if the directory did not exist yet, its our first run. Therefore backup the config first, so the user
-  # does not lose anything  
+  
+  # backup config file if first run
+  exec { "backup_config":
+    command => "cp ${ssh_config_file} ${ssh_config_file}.old",
+	onlyif => ["test -f {$ssh_config_file}"]
+  }
+  
+  exec { "use_old_config":
+    command => "mv ${ssh_config_file} ${ssh_config_dir}/config_old_backup",	
+	require => Exec["backup_config"], #backup first
+	onlyif => ["test -f {$ssh_config_file}"]
+  }
+  
+  
+  # ensure that we have run once, so never trigger the first run again
+  file { $firsrunlock:
+    ensure => 'present',
+	notify => Exec["use_old_config"],
+  }
+  
+  file { $ssh_config_file :
+    owner => $::luser
+  } 
 }

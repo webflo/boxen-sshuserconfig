@@ -1,54 +1,38 @@
-SSH Userconfig Puppet Module
+SSH Config (alias) Boxen Puppet Module
 ============================
 
-This module configures a sane configurable ~/.ssh/config for several users.
+Basically started to derive from Jimdo/puppet-sshuserconfig,  but in the end i rather completly rewritten (sadly)
 
-The main goal is to have Host aliases with different ssh keypairs working
-like this:
+This module lets you maintain your .ssh/config a sain way, using the debian-art .ssh/config.d/<alias> folder
+Every entry in .ssh/config.d/* will be used to generate the .ssh/config file automatically - so it does not change the way ssh works,
+but rather generates the config file ( instead of concatenating).
 
-http://blog.firmhouse.com/configuring-multiple-private-ssh-deploy-keys-in-jenkins-for-github-com
+This makes maintaing entrys much easier and convinient.
 
-If you have several private repos in github.com and you want to have a privilege seperation (no global read-only user for all repositories),
-you can easily add a separate keypair per node/node role/profile like this:
+This module is perfectly compatible with Boxen
+Usage
+---------
+# this does setup the .ssh config, backups your old one and uses it as an entry in .ssh/config.d/config_old
+incldue sshuserconfig 
 
-XXX doc
+sshuserconfig::host {
+"aliasname":
+remote_hostname => "somehost",
+remote_username => 'root',
+remote_port => '22',
+} 	
 
 Requirements
 ------------
 
-*List supported platforms and module dependencies here*
+* OSX (for now) 
 
 Manifests
 ---------
 
-*List and explain the contained manifests here*
-
-Testing
--------
-
-Everything you need to know about testing this module is explained in
-`TESTING.md`.
-
-[![Build Status](https://travis-ci.org/Jimdo/puppet-sshuserconfig.png?branch=master)](https://travis-ci.org/Jimdo/puppet-sshuserconfig)
-
-License and Author
-------------------
-
-Author:
- * Ole Michaelis    (Ole.Michaelis@googlemail.com)
- * Soenke Ruempler  (soenke@ruempler.eu)
- * Mathias Lafeldt  (mathias.lafeldt@gmail.com)
-
-Copyright:: 2013, Jimdo GmbH
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+* init.pp : us it like "includ sshuserconfig" to setup you .ssh folder correctly. 
+* host.pp : use this to generate a new entry
+ 
+ToDo
+---------
+* remove the OSX requirement and make it Linux compatible ( bascically just abstract the default user folder - thats it)
